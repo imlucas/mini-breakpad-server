@@ -30,15 +30,15 @@ class Record
       callback(null, record)
 
   # Public: Restore a Record from raw representation.
-  @unserialize: (id, representation) ->
+  @unserialize: (id, doc) ->
     new Record
-      id: id
-      time: new Date(representation.time)
-      path: representation.path
-      sender: representation.sender
-      product: representation.fields.prod
-      version: representation.fields.ver
-      fields: representation.fields
+      id: doc._id
+      time: doc.time
+      path: doc.path
+      sender: doc.sender
+      product: doc.fields.prod
+      version: doc.fields.ver
+      fields: doc.fields
 
   # Private: Gets the IP address from request.
   @getIpAddress: (req) ->

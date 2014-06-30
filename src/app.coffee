@@ -8,11 +8,10 @@ WebHook = require './webhook'
 app = express()
 webhook = new WebHook
 
-db = new Database
-db.on 'load', ->
-  port = process.env.MINI_BREAKPAD_SERVER_PORT ? 1127
-  app.listen port
-  console.log "Listening on port #{port}"
+db = new Database process.env.MINI_BREAKPAD_SERVER_MONGODB, process.env.MINI_BREAKPAD_SERVER_COLLECTION
+port = process.env.MINI_BREAKPAD_SERVER_PORT ? 26017
+app.listen port
+console.log "Listening on port #{port}"
 
 app.set 'views', path.resolve(__dirname, '..', 'views')
 app.set 'view engine', 'jade'
@@ -43,7 +42,9 @@ root =
     ''
 
 app.get "/#{root}", (req, res, next) ->
-  res.render 'index', title: 'Crash Reports', records: db.getAllRecords()
+  db.getAllRecords (err, docs) ->
+    return next err if err
+    res.render 'index', title: 'Crash Reports', records: docs
 
 app.get "/#{root}view/:id", (req, res, next) ->
   db.restoreRecord req.params.id, (err, record) ->
