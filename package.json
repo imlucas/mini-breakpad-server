@@ -6,7 +6,20 @@
     "mini-breakpad-server": "bin/mini-breakpad-server"
   },
   "scripts": {
-    "prepublish": "grunt coffee"
+    "prepublish": "grunt coffee",
+    "dist": "lone"
+  },
+  "lone": {
+    "ignore": [
+      "src/*.coffee",
+      "node_modules/coffee-script/**",
+      "node_modules/grunt/**",
+      "node_modules/grunt-cli/**",
+      "node_modules/grunt-coffeelint/**",
+      "node_modules/grunt-contrib-coffee/**",
+      "node_modules/grunt-shell/**",
+      "node_modules/lone/**"
+    ]
   },
   "dependencies": {
     "decompress-zip": "0.0.4",
@@ -27,10 +40,11 @@
   "devDependencies": {
     "coffee-script": "~1.6.2",
     "grunt": "~0.4.1",
-    "grunt-contrib-coffee": "~0.6.6",
-    "grunt-coffeelint": "~0.0.6",
     "grunt-cli": "~0.1.7",
+    "grunt-coffeelint": "~0.0.6",
+    "grunt-contrib-coffee": "~0.6.6",
     "grunt-shell": "~0.2.2",
+    "lone": "^0.3.1",
     "rimraf": "~2.1.4"
   },
   "licenses": [
