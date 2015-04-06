@@ -33,6 +33,7 @@ app.post '/post', (req, res, next) ->
     return next err if err?
 
     console.log 'saved', filename
+    res.send path.basename(filename)
     res.end()
 
 root =
